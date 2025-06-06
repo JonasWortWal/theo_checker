@@ -1,3 +1,5 @@
+import os
+
 USE_KI = True
 KI_PROVIDER = "openrouter"
-API_KEY = "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"
+API_KEY = os.getenv("API_KEY")
