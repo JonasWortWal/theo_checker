@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>Theologie-Prüfer</title>
+</head>
+<body>
+    <h1>YouTube-Lehrprüfung</h1>
+    <form method="post">
+        <input name="ytlink" placeholder="YouTube-Link hier einfügen" size="50">
+        <button type="submit">Prüfen</button>
+    </form>
+    {% if result %}
+        {% if result.error %}
+            <p><strong>Fehler:</strong> {{ result.error }}</p>
+        {% else %}
+            <h2>Kurzwarnung:</h2>
+            <ul>
+            {% for warn in result.warnings %}
+                <li>{{ warn }}</li>
+            {% endfor %}
+            </ul>
+            {% if result.ki %}
+                <h2>KI-Analyse:</h2>
+                <p>{{ result.ki }}</p>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</body>
+</html>

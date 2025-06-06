@@ -1,0 +1,3 @@
+USE_KI = True
+KI_PROVIDER = "openrouter"
+API_KEY = "HIER_DEIN_API_KEY"
