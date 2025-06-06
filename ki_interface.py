@@ -9,13 +9,16 @@ def run_ki_analysis(transcript):
                 "https://openrouter.ai/api/v1/chat/completions",
                 headers={"Authorization": f"Bearer {API_KEY}"},
                 json={
-                    "model": "deepseek-chat",
+                    "model": "openrouter/deepseek-chat",
                     "messages": [{"role": "user", "content": prompt}],
                     "max_tokens": 600
                 }
             )
-            return response.json()['choices'][0]['message']['content']
+            data = response.json()
+            if "error" in data:
+                return f"[KI-Fehler: {data['error']['message']}]"
+            return data['choices'][0]['message']['content']
         else:
             return "Kein unterstützter KI-Anbieter konfiguriert."
     except Exception as e:
-        return "Fehler bei der KI-Anfrage."
+        return f"[Technischer Fehler bei KI-Abfrage: {str(e)}]"
